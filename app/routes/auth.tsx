@@ -1,21 +1,21 @@
 import {usePuterStore} from "~/lib/puter";
-import {useLocation, useNavigate} from "react-router";
 import {useEffect} from "react";
+import {useLocation, useNavigate} from "react-router";
 
-export const meta = (() => ([
-    {title: 'ResumeMind | Auth'},
-    {name: 'description', content: 'Log into your account'},
-]))
+export const meta = () => ([
+    { title: 'ResumeMind | Auth' },
+    { name: 'description', content: 'Log into your account' },
+])
+
 const Auth = () => {
-    const {isLoading, auth} = usePuterStore();
+    const { isLoading, auth } = usePuterStore();
     const location = useLocation();
     const next = location.search.split('next=')[1];
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        if (auth.isAuthenticated) navigate(next);
-    }, [auth.isAuthenticated, next]);
+        if(auth.isAuthenticated) navigate(next);
+    }, [auth.isAuthenticated, next])
 
     return (
         <main className="bg-[url('/images/bg-auth.svg')] bg-cover min-h-screen flex items-center justify-center">
@@ -23,7 +23,7 @@ const Auth = () => {
                 <section className="flex flex-col gap-8 bg-white rounded-2xl p-10">
                     <div className="flex flex-col items-center gap-2 text-center">
                         <h1>Welcome</h1>
-                        <h2>Log in to Continue Your Job Journey</h2>
+                        <h2>Log In to Continue Your Job Journey</h2>
                     </div>
                     <div>
                         {isLoading ? (
@@ -37,7 +37,7 @@ const Auth = () => {
                                         <p>Log Out</p>
                                     </button>
                                 ) : (
-                                    <button className="auth-button" onClick={auth.signOut}>
+                                    <button className="auth-button" onClick={auth.signIn}>
                                         <p>Log In</p>
                                     </button>
                                 )}
@@ -49,4 +49,5 @@ const Auth = () => {
         </main>
     )
 }
+
 export default Auth
